@@ -1,7 +1,4 @@
 - 👋 Hi, I’m @hdjustice
-- 👀 I’m interested in what this application is all about
-- 🌱 I’m currently learning Google Analytics
-- 💞️ I’m looking to collaborate on anything I might be able help with
 - 📫 You can reach me here
 
 <!---
