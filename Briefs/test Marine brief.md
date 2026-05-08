@@ -1,4 +1,5 @@
 # Marine MVP -  Initiative Brief
+- Created using Gemini, brief context & access to historical docs in a Google drive
 
 ## **Outcome Summary**
 
