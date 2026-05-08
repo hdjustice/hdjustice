@@ -138,16 +138,16 @@ This initiative directly supports NWS's mission to provide **authoritative, time
 
 #### Feasibility Risks (Can we build it with available tech/data?)
 
-- **Data availability:** Marine forecasts (wind, waves, visibility) must be real-time, reliable, and integrated
-  - **Risk:** Data latency or inconsistency could undermine user trust (especially USCG/commercial use)
-  - **Validation:** Audit existing marine forecast data pipelines; assess update frequency and reliability vs. user needs
+- **Data availability:** Marine forecasts and observations must be real-time, reliable, and integrated from api.weather.gov
+  - **Risk:** Data latency or inconsistency could undermine user trust (especially USCG/commercial use); API rate limits or availability issues
+  - **Validation:** Audit api.weather.gov marine data endpoints; assess update frequency, reliability, and API performance under load
 
 - **Performance with interactive visualizations:**
   - **Risk:** Maps and charts may introduce unacceptable load times or performance degradation
   - **Validation:** Performance testing of map libraries, chart rendering on low-bandwidth mobile connections; Google Lighthouse/WebPageTest targets
 
 - **Mobile experience for complex data:**
-  - **Risk:** Weather maps and detailed data grids don't always translate well to mobile screens
+  - **Risk:** Weather maps and detailed data grids don't always translate well to mobile screens; point data and zone forecasts require clear, non-overwhelming presentation
   - **Validation:** Responsive design testing; mobile usability testing with actual mariners on mobile devices in realistic contexts
 
 - **Integration with legacy systems:**
@@ -158,7 +158,7 @@ This initiative directly supports NWS's mission to provide **authoritative, time
 
 - **Stakeholder alignment:** USCG, commercial maritime industry, and recreational boating communities have different needs
   - **Risk:** Trying to serve all segments equally may dilute the value for each
-  - **Validation:** Prioritize MVP scope based on highest-impact segment (likely USCG + commercial); plan phase 2 for recreational enhancements
+  - **Validation:** Prioritize MVP scope based on highest-impact segment; validate with product owners that MoSCoW prioritization aligns with organizational goals
 
 - **Marketing/outreach requirements:**
   - **Risk:** Even with great design, users won't know the new platform exists or is better
@@ -188,57 +188,109 @@ This initiative directly supports NWS's mission to provide **authoritative, time
 
 ### What're you building?
 
-#### In Scope (MVP)
+#### MVP Feature Set (Using MoSCoW Prioritization)
 
-1. **Unified marine weather dashboard** 
-   - Real-time display of critical data: wind speed/direction, wave height, visibility, current forecasts
-   - Geographic map interface showing marine zones, offshore areas, coastal regions
-   - Time-series forecasts (next 24-72 hours) for key parameters
+**🔴 MUST Have (Core MVP - Non-negotiable)**
 
-2. **Multi-persona information architecture**
-   - "Critical alerts" path for USCG/emergency users (fastest access to warnings/severe conditions)
-   - "Detailed forecast" path for commercial mariners (granular data, historical comparisons)
-   - "Quick check" path for recreational users (simplified, digestible format)
+1. **Point Data Access**
+   - Users can search for and view point forecasts for any marine location
+   - Display all marine-related weather variables available in api.weather.gov (wind speed/direction, wave height, visibility, temperature, pressure, etc.)
+   - Clearly present current conditions and forecast timeline (24-72 hour forecasts)
+   - *Why:* Core use case for all user types (commercial, USCG, recreational); foundation for decision-making
 
-3. **Mobile-first, accessible experience**
-   - Fully responsive design tested on phones, tablets
-   - WCAG 2.1 AA compliance (alt text for maps, keyboard navigation, screen reader compatibility)
-   - Fast load times (<3 sec on 4G mobile)
+2. **Coastal Marine Zone Forecasts**
+   - Users can access all coastal marine zone forecasts available in api.weather.gov
+   - Browse forecast zones by geographic area (state/region)
+   - Display zone-based forecasts with critical marine hazards and conditions
+   - *Why:* USCG, commercial shipping, and recreational mariners rely on zone forecasts for regional planning
 
-4. **Visual data presentation**
-   - Interactive maps with zoomable marine zones
-   - Readable charts and graphs (no more low-resolution images)
-   - Color-coded severity levels (accessible to colorblind users)
+3. **Marine Hazard Information**
+   - Users can access all marine hazard information available in api.weather.gov (gale warnings, small craft advisories, marine weather statements, etc.)
+   - Highlight critical alerts and warnings prominently
+   - Clear explanation of what each hazard means and recommended actions
+   - *Why:* Safety-critical; mariners must quickly identify dangerous conditions
 
-#### Out of Scope (Future Phases)
+4. **Buoy Observation Data**
+   - Users can access nearby buoy observation data (real measured conditions from NOAA buoys)
+   - Display buoy locations on map or list
+   - Show current observations: wind, waves, temperature, pressure from actual data stations
+   - *Why:* Provides ground truth observations that complement forecasts; builds trust in NWS data
 
-- [ ] Integration with commercial maritime operational systems (vessel tracking, routing optimization) — Phase 2
-- [ ] Custom alerts and notifications for professional mariners — Phase 2
-- [ ] Historical data archive and trend analysis — Phase 2
-- [ ] Integration with USCG internal systems — requires separate procurement/security process
-- [ ] Hyperlocal marina or port-specific information — Phase 2
+5. **Navigation to Point/Zone of Interest**
+   - Users can easily navigate to the marine point or zone they are most interested in
+   - Support multiple navigation methods: search by location name, zip code, coordinates; map-based selection; saved locations (if feasible)
+   - Mobile-friendly navigation that works on small screens
+   - *Why:* Usability foundation; users must quickly find their relevant area without frustration
 
-#### Why these out-of-scope decisions?
+**🟡 SHOULD Have (High Priority - MVP with nice polish)**
 
-We're focusing MVP scope on **presenting existing NWS marine data in an accessible, modern interface**. Deeper integrations and features require additional stakeholder alignment, technical development, and security/compliance reviews. Phasing allows us to validate the core value proposition quickly.
+1. **Map-Based Visualization**
+   - Users can view all marine-related weather variables in an interactive map format
+   - Display point data, zone forecasts, hazard alerts, buoy locations on zoomable map
+   - Color-coded severity levels and easy-to-read legend
+   - Mobile-responsive map interface
+   - *Why:* Visual presentation addresses core problem (hard-to-interpret text/charts); differentiates from commercial competitors
+   - *Feasibility Note:* Ensure maps are accessible (alt text, keyboard navigation, screen reader support)
+
+2. **Additional Marine Observations**
+   - Users can access other marine-related observation data available in api.weather.gov (e.g., tide station observations, bar observations)
+   - Surface-these data alongside forecast and buoy data for complete situational awareness
+   - *Why:* Supports commercial mariners and USCG who need comprehensive data picture
+
+3. **Tidal Information**
+   - Users can access tidal information for their area of interest
+   - Display current tide state and forecast tide times/heights
+   - *Why:* Critical for inlet/coastal navigation, fishing, and USCG operations; users currently go elsewhere for this data
+
+4. **Specialized Marine Forecasts**
+   - Users can access any specialized marine forecasts available in api.weather.gov (e.g., bar forecasts, high seas forecasts)
+   - Present in context of the marine location or zone being viewed
+   - *Why:* Serves power users (commercial fishing, USCG) who need specialized products
+
+**💡 COULD Have (Nice-to-have - Future Phases)**
+
+1. **Offshore Marine Forecasts**
+   - Users can access offshore/high seas marine forecasts beyond coastal zones
+   - *Why:* Valuable for commercial shipping, cruise lines, but requires additional API integration; lower priority than coastal coverage
+   - *Timeline:* Phase 2 (post-launch evaluation)
+
+2. **Water Temperature Information**
+   - Users can view water temperature forecasts and observations
+   - *Why:* Useful for commercial fishing, recreation, but not critical for initial MVP
+   - *Timeline:* Phase 2
+
+**❌ WON'T Have (Explicitly Out of Scope)**
+
+- Coastal information like rip currents, coastal hazards (beach hazard statements), surf forecasts
+  - *Reasoning:* These are coastal/beach-specific products; marine MVP focuses on offshore/marine zone forecasts. Coastal products would expand scope significantly and serve a different user segment. Consider for separate weather.gov initiative focused on beach/coastal recreation.
+
+#### Why this MVP scope?
+
+- **Focuses on existing NWS data:** All features leverage api.weather.gov endpoints currently available; no new data pipelines required
+- **Addresses core user pain points:** Hard-to-read text → visual maps; scattered data sources → unified interface; difficult navigation → improved UX
+- **Balances all user types:** MUST features serve commercial/USCG needs (safety, detailed data); SHOULD features improve experience for recreational users
+- **Accessibility first:** Scope avoids overly complex visualizations that would be hard to make accessible; provides text alternatives alongside maps
+- **Measurable scope:** Clear deliverables allow team to track progress and validate assumptions with user testing
+- **Realistic timeline:** MUST + SHOULD gives polished MVP; COULD items provide clear phase 2 roadmap without overcommitting
 
 #### How does this address risks?
 
-- **Value risk:** By meeting users where they are (mobile, visual-first) and serving their immediate decision-making needs, we increase likelihood of adoption
-- **Usability risk:** Multi-persona IA ensures different user types find their data quickly; accessibility compliance removes barriers for all users
-- **Feasibility risk:** Scope focuses on existing data/systems; no new data pipelines or complex integrations in MVP
-- **Viability risk:** Clear phasing and scope show organizational commitment; early USCG/maritime industry co-design builds buy-in
+- **Value risk:** Unified interface with visual presentation directly addresses "users go to commercial sites for prettier visualizations"; real-time buoy data builds trust
+- **Usability risk:** Multi-persona IA (point search for recreational, zone/hazard focus for USCG/commercial) ensures each user type finds what matters; accessibility compliance removes barriers
+- **Feasibility risk:** MVP uses only existing api.weather.gov data; no new integrations; scope defined by product owners based on data availability
+- **Viability risk:** Clear prioritization shows organizational focus; early testing with USCG/commercial mariners validates each feature's value
+- **Accessibility risk:** Explicit design for non-map alternatives (data tables, text descriptions) alongside visual presentations; WCAG 2.1 AA compliance requirement
 
 #### Go-to-market
 
 **Marketing & Outreach:**
-- **USCG liaison engagement:** Present to USCG Operations offices, rescue coordination centers; position NWS as their digital platform
-- **Commercial maritime industry:** Outreach to fishing associations (National Fisheries Institute), cruise lines, shipping companies; highlight cost savings vs. third-party services
-- **Recreational boating community:** Partner with boating clubs, sailing associations, water sports organizations; promote in boating safety materials
-- **Media/PR:** Position as "NWS modernization for maritime safety"; highlight accessibility improvements
+- **USCG liaison engagement:** Present MVP feature set to USCG Operations offices, rescue coordination centers; emphasize hazard alerts and integrated data
+- **Commercial maritime industry:** Outreach to fishing associations, cruise lines, shipping companies; highlight point data access, specialized forecasts, buoy observations
+- **Recreational boating community:** Partner with boating clubs, sailing associations; promote ease of use and mobile accessibility
+- **Media/PR:** Position as "NWS modernization for maritime safety"; highlight how improved data visualization helps users make safer decisions
 
 **Critical Organizations to Align:**
-- USCG (operational feedback, adoption, potential integration)
+- USCG (operational feedback, adoption, integration needs for hazard data)
 - Commercial fishing associations
 - National Weather Service regional marine forecast offices
 - Accessibility/disability advocates (for testing and feedback)
@@ -257,11 +309,12 @@ We're focusing MVP scope on **presenting existing NWS marine data in an accessib
 | Discovery & User Research | TBD | Competitive analysis, user interviews, accessibility research |
 | Design & Prototyping | TBD | Multi-persona IA, responsive design, accessibility-first approach |
 | Stakeholder Review/Feedback | TBD | USCG, commercial maritime, disability advocates |
-| Development & QA | TBD | Build, test, Lighthouse/accessibility audit |
-| User Testing (Round 1) | TBD | Mobile, desktop, assistive tech testing |
+| Development & QA | TBD | Build MUST + SHOULD features, test, Lighthouse/accessibility audit |
+| User Testing (Round 1) | TBD | Mobile, desktop, assistive tech testing with all three personas |
 | Beta Launch | TBD | Soft release to fishing communities, USCG liaisons |
 | Gather Feedback & Iterate | TBD | Bug fixes, UX refinements based on real usage |
 | Public Launch | TBD | Full traffic migration from legacy marine.weather.gov |
+| Phase 2 Planning | TBD | Evaluate COULD/WON'T items; plan offshore, water temp, coastal features |
 
 **Release Plan:** TBD — depends on discovery phase outcomes and organizational capacity
 
@@ -278,7 +331,7 @@ We're focusing MVP scope on **presenting existing NWS marine data in an accessib
 [Placeholder for screenshot of legacy marine.weather.gov]
 
 ### After
-*New Marine MVP with visual dashboard, interactive map, and accessible data presentation*
+*New Marine MVP with visual dashboard, interactive map, point data, hazard alerts, and accessible data presentation*
 [Placeholder for design mockup]
 
 ---
@@ -345,17 +398,17 @@ We're focusing MVP scope on **presenting existing NWS marine data in an accessib
 
 ## Questions for You (Higher-Level Strategic Thinking)
 
-As you move into the discovery phase, consider:
+As you move into design & prototyping, consider:
 
-1. **Who is the MVP's primary user?** All three segments matter, but USCG may unlock adoption faster. Should you optimize the MVP for their workflows first, then expand?
+1. **Navigation hierarchy:** Users need to find their point/zone quickly. Should the primary UX be "search for my location first" or "browse map and explore"? Does this change by user type?
 
-2. **What accessibility barriers are we creating now?** Weather maps and real-time data are inherently complex. What's our strategy for making these accessible without oversimplifying?
+2. **Data density vs. clarity:** The MUST features include many data variables. How do you present all of this without overwhelming recreational users, while still serving commercial mariners who need granular detail?
 
-3. **How do we build trust with users leaving commercial competitors?** What would make a commercial fisherman or USCG officer choose NWS over their current platform?
+3. **Map accessibility:** Maps are central to your visual presentation, but they're inherently difficult to make accessible. What's your plan for screen reader users, keyboard-only users, and those with color blindness?
 
-4. **What does "mobile-first" mean for marine users?** Are people checking weather on mobile before they leave shore, or during operations? This changes our design priorities.
+4. **Trust-building:** Users abandon NWS for commercial sites partly due to presentation. What specific visual cues (e.g., real-time buoy data, warning prominence, confidence indicators) will rebuild trust?
 
-5. **How do we transition users away from radio/email?** Legacy systems have deep institutional roots. What adoption incentives or operational changes support migration?
+5. **Mobile constraints:** Buoy locations, zone boundaries, hazard alerts are complex on desktop. How do you simplify for mobile without losing critical information?
 
-6. **Are there liability or regulatory considerations?** If NWS data is critical for USCG rescue operations, what compliance, data accuracy, or legal review is required?
+6. **Phase 2 runway:** The offshore forecasts (COULD) could be important for commercial shipping. Are product owners aligned on the post-launch evaluation timeline, or should some offshore data be in the MVP?
 
