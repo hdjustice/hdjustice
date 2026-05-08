@@ -3,6 +3,8 @@
 ## Summary: Test Marine Brief vs. Marine MVP Initiative Brief
 
 I can see the key differences now. Here's the comparison:
+- [Original Initiative brief](hdjustice/hdjustice/Briefs/test Marine brief.md)
+- [New Initiative brief](hdjustice/hdjustice/Briefs/Marine MVP Initiative Brief.md)
 
 ---
 
