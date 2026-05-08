@@ -1,5 +1,5 @@
 # Marine MVP Initiative Brief
-- Created using Copilot, brief context, Agent Description file, and no access historical docs
+- Created using GitHub/Copilot, brief context, Agent Description file, and no access historical docs
 
 ## Outcome Summary
 > Provide mariners—including commercial fishermen, Coast Guard (USCG), cruise lines, cargo ships, and recreational mariners—with an authoritative, accessible, and high-confidence digital platform for critical weather data (wind, waves, visibility) to ensure safety and efficient navigation.
