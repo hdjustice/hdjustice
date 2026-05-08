@@ -5,7 +5,7 @@
 | Document | Source | Length | Tone | Completeness |
 |----------|--------|--------|------|--------------|
 | **Claude Brief** | AI-generated (Claude) with agent description | 233 lines | Thorough, structured | Most comprehensive |
-| **Gemini Brief** | Google Docs/Gemini with historical docs access | 160 lines | Sparse, template-like | Minimal, incomplete |
+| **Gemini Brief** | AI-generated (Gemini) with historical docs access | 160 lines | Sparse, template-like | Minimal, incomplete |
 | **GitHub Brief** | AI-generated (Copilot) with agent description | 416 lines | Detailed, strategic | Most comprehensive |
 
 ---
