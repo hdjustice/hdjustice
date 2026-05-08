@@ -1,5 +1,5 @@
 # Marine MVP -  Initiative Brief
-- Created using Gemini, brief context & access to historical docs in a Google drive
+- Created using Google Docs/Gemini, no agent description, brief context & access to historical docs in a Google drive
 
 ## **Outcome Summary**
 
