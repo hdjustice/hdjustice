@@ -3,7 +3,6 @@
 
 **Prompt:** OK so let's try it out. Based on my agent description, help me write a feature brief, using the @hdjustice/hdjustice/files/main/Templates/Initiative%20Brief%20template.md.  This is for adding Marine information on the new weather redesigned website. The outcome summary is The Marine MVP aims to provide mariners—including commercial fishermen, the Coast Guard (USCG), cruise lines, cargo ships, and recreational mariners—with an authoritative, accessible, and high-confidence digital platform for critical weather data (wind, waves, visibility) to ensure safety and efficient navigation. Existing marine page on weather.gov is found at URL https://www.weather.gov/marine/.  Some additional information about the problem is Current marine products are often presented in large, hard-to-interpret text or low-resolution charts.  This affects Commercial fishermen, Coast Guard (USCG), cruise lines, cargo ships, and recreational mariners. Stakeholder interviews show that users are going to commercial sites that offer prettier, more interactive visualizations, despite NWS expertise.
 The problem cause seems to be reliance on legacy transmission methods (radio, FTP email) and a lack of integrated, mobile-friendly graphical interfaces for offshore/high seas data.
-Copilot finished thinking
 
 ---
 
